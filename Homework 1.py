@@ -5,12 +5,13 @@ CharacterRace = ["Elf","Witch","Ork","Dwarf","Tiefling","Aasimar","Tabaxi","Mino
 
 #Random number for selecting random traits
 import random
-x = random.randint(-12,12)
+x = random.randint(0,len(CharacterTraits))
+y = random.randint(0,len(CharacterRace))
 
-#Starting the game with a yes/no question
+#Starting the game with a yes/no questiony
 Answer = input("Hello, Player. Are you ready to see you're new self? ")
 if Answer == "yes":
-    print(CharacterTraits[x] + CharacterRace[x])
+    print(CharacterTraits[x] + CharacterRace[y])
 
 elif Answer == "no":
     print("I'm sorry to hear that. Maybe next time, then!")
