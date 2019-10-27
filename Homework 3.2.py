@@ -13,17 +13,17 @@ Ndic = {"Elf":["Aeris","Cearil","Korn","Olrin","Seice"],
         "Tabaxi":["Bartholemew","Kitkat","Tabbytha","Whispurr","Lucifurr"],
         "Minotaur":["Reovera","Noodor","Lannas","Duulno","Oennas"],
         "Furball":["Cotton","Woolryn","Yearin","Froofle","Poufe"],
-        "Firbolg":["Waestris","Carran","Yelceran","Magxina","Xyrmoira"]}
+        "Firbolg":["Waestris","Carran","Yelceran","Magxina","Xyrmoira"],}
 
 
-#Random number for selecting random traits
+#Random numbers for selecting random traits
 import random
 x = random.randint(0,len(Ldic["Ctraits"]))
 y = random.randint(0,len(Ldic["Craces"]))
 z = random.randint(0,len(Ldic["OhNo"]))
 UglySobbing = random.randint(0,5)
 
-#Starting the game by assigning the player a trait and race
+#The game itself. Open with the option to recall previously saved character data.
 Answer = input("Hello, Player. Are you ready to see your new self? ").lower()
 if Answer == "yes":
     PlayerC = Ldic["Ctraits"][x] + Ldic["Craces"][y]
