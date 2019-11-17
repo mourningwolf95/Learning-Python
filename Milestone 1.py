@@ -5,8 +5,8 @@ import random
 #Globals
 
 slot = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
-P1 = " "
-P2 = " "
+Players = {"1":" ",
+           "2":" "}
 
 #Methods and functions
 
@@ -23,28 +23,27 @@ def Board(board):
 def PlayerXO():
     Loop = True
     while Loop == True:
-        You = input("Welcome, Player! Do you want to be X or O? ").upper()
+        You = input("Let's play Tic-Tac-Toe! Do you want to be X or O? ").upper()
         if You == "X" or You == "O":
             print("Okay. You will be " + You + ".")
-            global P1
-            P1 = You
+            Players["1"] = You
             Loop = False
             return You
         else:
             print("""
 Let's try that again, shall we?""")
+            return Loop
 
 def Player2():
-    global P2
-    if P1 == "X":
-        P2 = "O"
+    if Players["1"] == "X":
+        Players["2"] = "O"
     else:
-        P2 = "X"
+        Players["2"] = "X"
 
-def PlaceMarker(board, marker, position):
-    global slot
-    slot.insert(position, marker)
-    print(Board(slot))
+#def PlaceMarker(board, marker, position):
+ #   global slot
+  #  slot.insert(position, marker)
+   # print(Board(slot))
     
 def WinCheck(board, M):
     if((board[7] == M and board[8] == M and board[9]) == M or
@@ -77,17 +76,18 @@ def IsFull(Slot):
     else:
         return True
 
-def MoveHere(Slot):
+def MoveHere(Slot, XO):
+    global slot
     Loc = int(input("Please enter a number that corresponds with there you would like to move. "))
     Free = SpotCheck(slot, Loc)
     if Free == False:
-        Loc = int(input("Please enter a number that corresponds with there you would like to move. "))
+        Loc = int(input("Please enter a number that corresponds with where you would like to move. "))
     else:
-        slot.insert(Loc, P1)
+        slot[Loc] = XO
     return Free
 
 def Replay():
-    Again = input("Do you want to play again? ").lower
+    Again = input("Do you want to play again? ").lower()
     if Again == "yes":
         print("Hooray!")
         return True
@@ -97,10 +97,47 @@ def Replay():
     else:
         print("I'm sorry, I didn't quite catch that.")
         return "I'm a dumb piece of shit program that won't fucking work for some stupid reason."
+
+
+
+def Main():
+    PlayerXO()
+    Player2()
+    X = RandFirst()
+    if X == "1":
+        Y = "2"
+    else:
+        Y = "1"
+    GameOver = "No"
+    while GameOver == "No":
+        while GameOver == "No":
+            GameOver = Move(X)
+            break
+        print(" ")
+        while GameOver == "No":
+            GameOver = Move(Y)
+            break
+
     
-
-
+def Move(Pl):
+    print("It's you're turn, Player" + Pl + ".")
+    MoveHere(slot, Players[Pl])
+    print(Board(slot))
+    Win = WinCheck(slot, Players[Pl])
+    F = IsFull(slot)
+    if Win == True:
+        print("Congratulations! Player" + Pl + " wins!")
+        return "Yes"
+    else:
+        if F == True:
+            print("Alas, there are no more moves available.")
+            return "Yes"
+        else:
+            return "No"
+    
+        
+    
     
 #Main method
 
-print(Replay())
+Main()
